@@ -5,7 +5,7 @@ services:
         image: nginx:latest
         container_name: my-nginx
         ports:
-            - "8080:80"
+            - "80:80"
         volumes:
           - ./app:/app
           - ./nginx-conf:/etc/nginx/conf.d/
