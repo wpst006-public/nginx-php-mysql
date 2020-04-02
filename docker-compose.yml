@@ -1,6 +1,6 @@
 version: '3'
 
-services:
+services:    
     web:     
         image: nginx:latest
         container_name: my-nginx
@@ -9,3 +9,21 @@ services:
         volumes:
           - ./app:/app
           - ./nginx-conf:/etc/nginx/conf.d/
+        networks:
+          - my-docker-network
+    php:              
+        image: php:7.3-fpm
+        container_name : my-php73-fpm
+        build: php/        
+        volumes:
+            - ./app:/app            
+            #- "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+            #- "./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini"
+        #links:
+            #- mysqldb   
+        networks:
+          - my-docker-network    
+networks:
+  my-docker-network:
+    driver: bridge            
+            
