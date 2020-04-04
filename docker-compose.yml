@@ -1,8 +1,16 @@
 version: '3'
 
 services:    
+    php:              
+        image: php:7.3-fpm
+        container_name : my-php73-fpm
+        build: php-conf/        
+        volumes:
+            - ./app:/app              
+        networks:
+          - my-docker-network 
     web:     
-        image: nginx:latest
+        image: nginx:1.17
         container_name: my-nginx
         ports:
             - "80:80"
@@ -10,20 +18,23 @@ services:
           - ./app:/app
           - ./nginx-conf:/etc/nginx/conf.d/
         networks:
-          - my-docker-network
-    php:              
-        image: php:7.3-fpm
-        container_name : my-php73-fpm
-        build: php/        
+          - my-docker-network 
+    mysqldb:
+        image: mysql:5.7
+        container_name : my-mysql        
+        restart : always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: test_db
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
         volumes:
-            - ./app:/app            
-            #- "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-            #- "./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini"
-        #links:
-            #- mysqldb   
+            - ./mysql-data:/var/lib/mysql  
         networks:
-          - my-docker-network    
+            - my-docker-network 
 networks:
-  my-docker-network:
-    driver: bridge            
+    my-docker-network:
+        driver: bridge            
             

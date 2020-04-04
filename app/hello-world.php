@@ -1,3 +1,3 @@
 <?php
-echo "Hello from PHP service";
+echo "<h1>Hello from PHP service.</h1>";
 ?>
