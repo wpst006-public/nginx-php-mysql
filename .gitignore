@@ -1,2 +1,2 @@
-#mysql-data/**
 !mysql-data/.gitkeep
+setup-folders.sh
