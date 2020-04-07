@@ -1,10 +1,11 @@
 version: '3'
 
 services:    
-    php:              
-        image: php:7.3-fpm
-        container_name : my-php73-fpm
-        build: php-conf/        
+    php:             
+        container_name: my-php73-fpm
+        build: 
+            context: ./php-conf
+            dockerfile : php-Dockerfile
         volumes:
             - ./app:/app              
         networks:

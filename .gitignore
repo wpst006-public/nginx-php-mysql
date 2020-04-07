@@ -1,2 +1,3 @@
 !mysql-data/.gitkeep
 setup-folders.sh
+clear-docker-images.sh
